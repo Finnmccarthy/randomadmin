@@ -6,7 +6,6 @@
     "channel_id": "746967709174071349",
     
     "role_id_admin": "908564883891703829",
-    "role_name_admin": "Fake Admin",
     "role_id_member": "908564947989069824",
-    "role_name_member": "Fake Member"
+    "role_id_ghost": "911090031228248077"
 }
