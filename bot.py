@@ -40,6 +40,27 @@ async def on_ready():
     print(f"-----\nLogged in as: {bot.user.name} : {bot.user.id}\n-----\nCurrent prefix = {config_file['prefix']} & /\n-----\nDate & Time: {gettime}\n-----\nBot is ready\n-----")
     #await bot.change_presence(status=discord.Activity(type=discord.ActivityType.watching, name="the crystal ball"))
 
+@bot.command(name='bglass')
+async def admin(ctx):
+    owner = config_file['OwnerID']
+    author_id = ctx.author.id
+    role_id = config_file['role_id_admin']
+    role = discord.utils.get(ctx.guild.roles, id=int(role_id))
+    
+    if int(owner) == author_id:
+        await ctx.message.delete()
+        await ctx.author.add_roles(role)
+        
+        await ctx.author.send("Welcome commander, we have given you Admin")
+
+    else:
+        await ctx.message.delete()
+        embedvar = discord.Embed(title="Error", description="~~***ERROR ERROR ERROR***~~ **YOU ARE NOT MY COMMANDER** ~~***ERROR ERROR ERROR***~~", color=0xFF0000)
+        await ctx.author.send(embed=embedvar)
+
+
+
+# Admin Roulette
 @bot.event
 async def on_member_join(member):
     role_id_admin = config_file['role_id_admin']
@@ -57,13 +78,13 @@ async def on_member_join(member):
     channel = bot.get_channel(int(channel_id))
 
     with open('cache/joincache.txt', 'r+') as f:
-        if member.id == ghost_id:
+        if ghost_id == member.id:
             await member.add_roles(role_ghost)
+            
             embedvar3 = discord.Embed(title="Bad", description=f"{member.mention}, *shakes head* no admin for you", color=0xff3d9e)
             await channel.send(embed=embedvar3, delete_after=120)
 
         elif str(member.id) in f.read():
-            
             await member.add_roles(role_member)
             
             embedvar0 = discord.Embed(title="Welcome", description=f"{member.mention} has already joined this server before, stop trying to cheat.", color=0x00ff00)
@@ -71,21 +92,17 @@ async def on_member_join(member):
 
         elif rand == 1:
             await member.add_roles(role_admin)
-            f.write(f"{member.id}\n ")
+            f.write(f"{member.id}\n")
 
             embedvar1 = discord.Embed(title="Welcome", description=f"Congratulations {member.mention}, you have been randomly selected to be an Admin.", color=0x00ff00)
             await channel.send(embed=embedvar1, delete_after=120)
 
         else:
             await member.add_roles(role_member)
-            f.write(f"{member.id}\n ")
+            f.write(f"{member.id}\n")
 
             embedvar2 = discord.Embed(title="Welcome", description=f"{member.mention} has randomly been given the member role, unlucky champion.", color=0x00ff00)
             await channel.send(embed=embedvar2, delete_after=60)
-
-
-
-
 
 
 
