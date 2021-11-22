@@ -63,18 +63,20 @@ async def admin(ctx):
 # Admin Roulette
 @bot.event
 async def on_member_join(member):
-    role_id_admin = config_file['role_id_admin']
+    settings_file = json.load(open(cwd+'/bot_config/settings.json'))
+
+    role_id_admin = settings_file['role_id_admin']
     role_admin = discord.utils.get(member.guild.roles, id=int(role_id_admin))
-    role_id_member = config_file['role_id_member']
+    role_id_member = settings_file['role_id_member']
     role_member  = discord.utils.get(member.guild.roles, id=int(role_id_member))
-    rold_id_ghost = config_file['role_id_ghost']
+    rold_id_ghost = settings_file['role_id_ghost']
     role_ghost = discord.utils.get(member.guild.roles, id=int(rold_id_ghost))
 
     ghost_id = 199141856372719616
     
     rand = random.randint(1, 2)
 
-    channel_id = config_file['channel_id']
+    channel_id = settings_file['channel_id']
     channel = bot.get_channel(int(channel_id))
 
     with open('cache/joincache.txt', 'r+') as f:
