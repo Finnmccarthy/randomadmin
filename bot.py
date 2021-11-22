@@ -95,7 +95,7 @@ async def on_member_join(member):
             f.write(f"{member.id}\n")
 
             embedvar1 = discord.Embed(title="Welcome", description=f"Congratulations {member.mention}, you have been randomly selected to be an Admin.", color=0x00ff00)
-            await channel.send(embed=embedvar1, delete_after=120)
+            await channel.send(embed=embedvar1)
 
         else:
             await member.add_roles(role_member)
