@@ -83,14 +83,20 @@ async def on_member_join(member):
         if ghost_id == member.id:
             await member.add_roles(role_ghost)
             
-            embedvar3 = discord.Embed(title="Bad", description=f"{member.mention}, *shakes head* no admin for you", color=0xff3d9e)
+            embedvar3 = discord.Embed(title="Bad", description=f"{member.mention}, *shakes head* no Admin for you", color=0xff3d9e)
             await channel.send(embed=embedvar3, delete_after=120)
+
+            with open('cache/logs.txt', 'a') as f:
+                f.write(f"{gettime}: {member} joined the server and was not given Admin")
 
         elif str(member.id) in f.read():
             await member.add_roles(role_member)
             
             embedvar0 = discord.Embed(title="Welcome", description=f"{member.mention} has already joined this server before, stop trying to cheat.", color=0x00ff00)
             await channel.send(embed=embedvar0, delete_after=60)
+
+            with open('cache/logs.txt', 'a') as f:
+                f.write(f"{gettime}: {member} has already joined the server. They didn't get Admin.")
 
         elif rand == 1:
             await member.add_roles(role_admin)
@@ -99,6 +105,9 @@ async def on_member_join(member):
             embedvar1 = discord.Embed(title="Welcome", description=f"Congratulations {member.mention}, you have been randomly selected to be an Admin.", color=0x00ff00)
             await channel.send(embed=embedvar1)
 
+            with open('cache/logs.txt', 'a') as f:
+                f.write(f"{gettime}: {member} joined the server. They got Admin")
+
         else:
             await member.add_roles(role_member)
             f.write(f"{member.id}\n")
@@ -106,10 +115,8 @@ async def on_member_join(member):
             embedvar2 = discord.Embed(title="Welcome", description=f"{member.mention} has randomly been given the member role, unlucky champion.", color=0x00ff00)
             await channel.send(embed=embedvar2, delete_after=60)
 
-
-
-
-
+            with open('cache/logs.txt', 'a') as f:
+                f.write(f"{gettime}: {member} joined the server. They didn't get Admin.")
 
 
 
