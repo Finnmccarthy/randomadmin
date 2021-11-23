@@ -40,8 +40,10 @@ async def on_ready():
     print(f"-----\nLogged in as: {bot.user.name} : {bot.user.id}\n-----\nCurrent prefix = {config_file['prefix']} & /\n-----\nDate & Time: {gettime}\n-----\nBot is ready\n-----")
     #await bot.change_presence(status=discord.Activity(type=discord.ActivityType.watching, name="the crystal ball"))
 
+
+
 # Ping command
-@slash.slash(name='ping', description='Measures bot latency', usage='ping')
+@bot.command(name='ping')
 async def ping(ctx):
     await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
 
@@ -62,7 +64,6 @@ async def admin(ctx):
         await ctx.message.delete()
         embedvar = discord.Embed(title="Error", description="~~***ERROR ERROR ERROR***~~ **YOU ARE NOT MY COMMANDER** ~~***ERROR ERROR ERROR***~~", color=0xFF0000)
         await ctx.author.send(embed=embedvar)
-
 
 
 # Admin Roulette
@@ -118,7 +119,7 @@ async def on_member_join(member):
             f.write(f"{member.id}\n")
 
             embedvar2 = discord.Embed(title="Welcome", description=f"{member.mention} has randomly been given the member role, unlucky champion.", color=0x00ff00)
-            await channel.send(embed=embedvar2, delete_after=60)
+            await channel.send(embed=embedvar2)
 
             with open('cache/logs.txt', 'a') as f:
                 f.write(f"{gettime}: {member} joined the server. They didn't get Admin.")
