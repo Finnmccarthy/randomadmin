@@ -40,6 +40,11 @@ async def on_ready():
     print(f"-----\nLogged in as: {bot.user.name} : {bot.user.id}\n-----\nCurrent prefix = {config_file['prefix']} & /\n-----\nDate & Time: {gettime}\n-----\nBot is ready\n-----")
     #await bot.change_presence(status=discord.Activity(type=discord.ActivityType.watching, name="the crystal ball"))
 
+# Ping command
+@slash.slash(name='ping', description='Measures bot latency', usage='ping')
+async def ping(ctx):
+    await ctx.send(f"Pong! {round(bot.latency * 1000)}ms")
+
 @bot.command(name='bglass')
 async def admin(ctx):
     owner = config_file['OwnerID']
