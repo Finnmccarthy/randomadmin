@@ -1,0 +1,11 @@
+version: "3"
+services:
+  radarr:
+    image: finnm/randomadmin
+    container_name: randomadmin-bot
+    environment:
+      - TOKEN=token-here
+      - TZ=Australia/Brisbane
+    deploy:
+      replicas: 1
+    restart: unless-stopped

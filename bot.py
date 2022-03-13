@@ -9,6 +9,7 @@ import json
 from datetime import datetime
 import random
 from pathlib import Path
+import os
 
 description = 'A Discord bot that randomly give someone admin on join'
 
@@ -30,8 +31,6 @@ bot = commands.Bot(bot.config_prefix, intents=intents, description=description, 
 slash = SlashCommand(bot)
 
 # Token
-token_file = json.load(open(cwd+'/bot_config/token.json'))
-bot.token_file = token_file['token']
 logging.basicConfig(level=logging.INFO)
 
 # Bot ready log
@@ -39,8 +38,6 @@ logging.basicConfig(level=logging.INFO)
 async def on_ready():
     print(f"-----\nLogged in as: {bot.user.name} : {bot.user.id}\n-----\nCurrent prefix = {config_file['prefix']} & /\n-----\nDate & Time: {gettime}\n-----\nBot is ready\n-----")
     #await bot.change_presence(status=discord.Activity(type=discord.ActivityType.watching, name="the crystal ball"))
-
-
 
 # Ping command
 @bot.command(name='ping')
@@ -125,5 +122,4 @@ async def on_member_join(member):
                 f.write(f"{gettime}: {member} joined the server. They didn't get Admin.")
 
 
-
-bot.run(bot.token_file)
+bot.run(os.getenv("TOKEN"))
