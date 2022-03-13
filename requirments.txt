@@ -1,2 +1,3 @@
-discord.py
-discord-py-slash-command
+async-timeout==3.0.1
+discord-py-slash-command==2.3.2
+discord.py==1.7.3
