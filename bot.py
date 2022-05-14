@@ -66,7 +66,7 @@ async def admin(ctx):
 # Admin Roulette
 @bot.event
 async def on_member_join(member):
-    settings_file = json.load(open(cwd+'/bot_config/settings.json'))
+    settings_file = json.load(open(cwd+'/bot_config/config.json'))
 
     role_id_admin = settings_file['role_id_admin']
     role_admin = discord.utils.get(member.guild.roles, id=int(role_id_admin))

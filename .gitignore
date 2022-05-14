@@ -3,3 +3,4 @@ bot_config/token.json
 bot_config/settings.json
 cache/joincache.txt
 cache/logs.txt
+notes.txt

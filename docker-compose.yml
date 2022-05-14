@@ -1,11 +1,26 @@
 version: "3"
 services:
-  radarr:
+  bot:
     image: finnm/randomadmin
-    container_name: randomadmin-bot
+    container_name: randomadmin
     environment:
       - TOKEN=token-here
       - TZ=Australia/Brisbane
+    volumes:
+      - config:/bot_config
+      - cache:/cache
     deploy:
       replicas: 1
     restart: unless-stopped
+
+volumes:
+  config:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.0.15,nolock,rw"
+      device: ":/volume1/cluster-fk/randomadmin-bot/bot_config"
+  cache:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.0.15,nolock,rw"
+      device: ":/volume1/cluster-fk/randomadmin-bot/cache"
